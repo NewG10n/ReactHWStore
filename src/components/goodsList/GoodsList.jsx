@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import GoodCard from "../goodCard";
 
 const GoodsList = () => {
-    return (
-        <div>
-            <h1>Goods List</h1>
-        </div>
-    )
-}
+  const [goodsData, setGoodsData] = useState([]);
+
+  useEffect(() => {
+    const getGoods = async () => {
+      try {
+        const response = await axios.get("https://fakestoreapi.com/products");
+        setGoodsData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getGoods();
+  }, []);
+
+  return (
+    <ul>
+      {goodsData.map((product) => (
+        <GoodCard key={product.id} product={product} />
+      ))}
+    </ul>
+  );
+};
 
 export default GoodsList;
