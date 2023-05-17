@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const Button = (props) => {
-    const name = props.name;
+const Button = ({ btnData }) => {
+  const { isInCart, onClick } = btnData;
 
-    return (
-        <button>
-            {name}
-        </button>
-    )
-}
+  return (
+    <button onClick={onClick}>{isInCart ? "Add +1" : "Add to cart"}</button>
+  );
+};
 
 export default Button;

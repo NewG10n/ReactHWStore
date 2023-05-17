@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../button";
+import { addToCart, cartHelpers, checkCart } from "../../utils/CartHelpers";
+import { createUseStyles } from "react-jss";
+
+const useStyles = createUseStyles({
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: "center",
+    alignItems: "center",
+    width: "20%",
+    padding: "20px",
+  },
+
+  card__img: {
+    maxWidth: "200px",
+  },
+});
 
 const GoodCard = ({ product }) => {
   const { title, image, price, id } = product;
+  const styles = useStyles();
+  const [isInCart, setInCart] = useState(checkCart(id));
+
+  const btnData = {
+    isInCart: isInCart,
+    onClick: () => {
+      addToCart(id);
+      setInCart(true);
+    },
+  };
 
   return (
-    <li>
+    <li className={styles.card}>
       <h3>{title}</h3>
-      <img src={image} alt={title} />
+      <img className={styles.card__img} src={image} alt={title} />
       <p>Price: ${price}</p>
       <p>Product number: {id}</p>
-      <Button />
+      <Button btnData={btnData} />
     </li>
   );
 };
