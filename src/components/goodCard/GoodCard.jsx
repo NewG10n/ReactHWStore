@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../button";
-import { addToCart, cartHelpers, checkCart } from "../../utils/CartHelpers";
+import { addToCart, removeFromCart, checkCart } from "../../utils/CartHelpers";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -23,11 +23,18 @@ const GoodCard = ({ product }) => {
   const styles = useStyles();
   const [isInCart, setInCart] = useState(checkCart(id));
 
-  const btnData = {
-    isInCart: isInCart,
+  const btnAddData = {
+    text: isInCart ? "Add +1" : "Add to cart",
     onClick: () => {
       addToCart(id);
       setInCart(true);
+    },
+  };
+
+  const btnRemoveData = {
+    text: "X",
+    onClick: () => {
+      !removeFromCart(id) && setInCart(false);
     },
   };
 
@@ -37,7 +44,8 @@ const GoodCard = ({ product }) => {
       <img className={styles.card__img} src={image} alt={title} />
       <p>Price: ${price}</p>
       <p>Product number: {id}</p>
-      <Button btnData={btnData} />
+      <Button btnData={btnAddData} />
+      {isInCart && <Button btnData={btnRemoveData} />}
     </li>
   );
 };
