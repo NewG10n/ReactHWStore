@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "../button";
 import { addToCart, removeFromCart, checkCart } from "../../utils/CartHelpers";
 import { checkFav, toggleFav } from "../../utils/FavHelpers";
+
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -19,12 +20,13 @@ const useStyles = createUseStyles({
   },
 });
 
-const GoodCard = ({ modal, product }) => {
-  const { isModal, setModal } = modal;
+const GoodCard = ({ product }) => {
   const { title, image, price, id } = product;
 
   const [isInCart, setInCart] = useState(checkCart(id));
   const [isFav, setFav] = useState(checkFav(id));
+
+  const { isModal, setModal } = useContext(ModalContext);
 
   const styles = useStyles();
 

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import GoodsList from "./components/goodsList";
-import GoodCard from "./components/goodCard";
-import Button from "./components/button";
 import Modal from "./components/modal";
+
 import "./App.css";
 
+const ModalContext = createContext(null);
 function App() {
   const [isModal, setModal] = useState(false);
 
   return (
-    <>
-      <GoodsList modal={{ isModal, setModal }} />
-      {isModal && <Modal modal={{ isModal, setModal }} />}
-    </>
+    <ModalContext.Provider value={{ isModal, setModal }}>
+      <GoodsList />
+      {isModal && <Modal />}
+    </ModalContext.Provider>
   );
 }
 

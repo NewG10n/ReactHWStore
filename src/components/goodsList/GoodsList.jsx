@@ -12,9 +12,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const GoodsList = ({ modal }) => {
-  const { isModal, setModal } = modal;
-
+const GoodsList = () => {
   const [goodsData, setGoodsData] = useState([]);
 
   const styles = useStyles();
@@ -35,11 +33,7 @@ const GoodsList = ({ modal }) => {
   return (
     <ul className={styles.cards_container}>
       {goodsData.map((product) => (
-        <GoodCard
-          key={product.id}
-          modal={{ isModal, setModal }}
-          product={product}
-        />
+        <GoodCard key={product.id} product={product} />
       ))}
     </ul>
   );

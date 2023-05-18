@@ -5,14 +5,28 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   modal: {
-    position: "absolute",
-    width: "200px",
-    height: "200px",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    position: "fixed",
+    top: "0",
+    left: "0",
+    right: "0",
+    bottom: "0",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  modalBody: {
+    padding: "20px",
+    backgroundColor: "white",
+    borderRadius: "10px",
+    boxShadow:
+      "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19)",
+    maxWidth: "600px",
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 });
 
@@ -22,15 +36,17 @@ const Modal = ({ modal }) => {
   const styles = useStyles();
 
   const confirmButtonData = {
-    text: "OK",
+    text: "Keep shopping",
     onClick: () => setModal(!isModal),
   };
 
   return (
     <>
       <div className={styles.modal}>
-        <h1 className="modal-title">{"title"}</h1>
-        <Button btnData={confirmButtonData} />
+        <div className={styles.modalBody}>
+          <h1 className="modal-title">{"title"}</h1>
+          <Button btnData={confirmButtonData} />
+        </div>
       </div>
     </>
   );
