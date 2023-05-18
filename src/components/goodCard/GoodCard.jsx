@@ -19,17 +19,21 @@ const useStyles = createUseStyles({
   },
 });
 
-const GoodCard = ({ product }) => {
+const GoodCard = ({ modal, product }) => {
+  const { isModal, setModal } = modal;
   const { title, image, price, id } = product;
-  const styles = useStyles();
+
   const [isInCart, setInCart] = useState(checkCart(id));
   const [isFav, setFav] = useState(checkFav(id));
+
+  const styles = useStyles();
 
   const btnAddData = {
     text: isInCart ? "Add +1" : "Add to Cart",
     onClick: () => {
       addToCart(id);
       setInCart(true);
+      setModal(!isModal);
     },
   };
 

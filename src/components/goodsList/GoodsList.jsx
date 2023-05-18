@@ -12,8 +12,11 @@ const useStyles = createUseStyles({
   },
 });
 
-const GoodsList = () => {
+const GoodsList = ({ modal }) => {
+  const { isModal, setModal } = modal;
+
   const [goodsData, setGoodsData] = useState([]);
+
   const styles = useStyles();
 
   useEffect(() => {
@@ -32,7 +35,11 @@ const GoodsList = () => {
   return (
     <ul className={styles.cards_container}>
       {goodsData.map((product) => (
-        <GoodCard key={product.id} product={product} />
+        <GoodCard
+          key={product.id}
+          modal={{ isModal, setModal }}
+          product={product}
+        />
       ))}
     </ul>
   );
