@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Button from "../button";
 import { addToCart, removeFromCart, checkCart } from "../../utils/CartHelpers";
+import { checkFav, toggleFav } from "../../utils/FavHelpers";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   card: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
+    // justifyContent: "space-between",
     alignItems: "center",
     width: "20%",
     padding: "20px",
@@ -22,6 +23,7 @@ const GoodCard = ({ product }) => {
   const { title, image, price, id } = product;
   const styles = useStyles();
   const [isInCart, setInCart] = useState(checkCart(id));
+  const [isFav, setFav] = useState(checkFav(id));
 
   const btnAddData = {
     text: isInCart ? "Add +1" : "Add to cart",
@@ -32,10 +34,18 @@ const GoodCard = ({ product }) => {
   };
 
   const btnRemoveData = {
-    text: "X",
+    text: "Remove from cart",
     onClick: () => {
       removeFromCart(id);
       setInCart(false);
+    },
+  };
+
+  const btnFavData = {
+    text: isFav ? "Remove from fav" : "Fav",
+    onClick: () => {
+      toggleFav(id);
+      setFav(!isFav);
     },
   };
 
@@ -45,6 +55,7 @@ const GoodCard = ({ product }) => {
       <img className={styles.card__img} src={image} alt={title} />
       <p>Price: ${price}</p>
       <p>Product number: {id}</p>
+      <Button btnData={btnFavData} />
       <Button btnData={btnAddData} />
       {isInCart && <Button btnData={btnRemoveData} />}
     </li>
