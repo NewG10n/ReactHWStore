@@ -1,8 +1,5 @@
-export const checkCart = (id) => {
-  const cart = JSON.parse(localStorage.getItem("cart"));
-
-  return !!cart[id];
-};
+export const checkCart = (id) =>
+  !!JSON.parse(localStorage.getItem("cart"))?.[id];
 
 export const addToCart = (id) => {
   let cart = {};
