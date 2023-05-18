@@ -26,7 +26,7 @@ const GoodCard = ({ product }) => {
   const [isFav, setFav] = useState(checkFav(id));
 
   const btnAddData = {
-    text: isInCart ? "Add +1" : "Add to cart",
+    text: isInCart ? "Add +1" : "Add to Cart",
     onClick: () => {
       addToCart(id);
       setInCart(true);
@@ -34,7 +34,7 @@ const GoodCard = ({ product }) => {
   };
 
   const btnRemoveData = {
-    text: "Remove from cart",
+    text: "Remove from Cart",
     onClick: () => {
       removeFromCart(id);
       setInCart(false);
@@ -42,7 +42,7 @@ const GoodCard = ({ product }) => {
   };
 
   const btnFavData = {
-    text: isFav ? "Remove from fav" : "Fav",
+    text: isFav ? "Remove from Favorites" : "Add to Favorites",
     onClick: () => {
       toggleFav(id);
       setFav(!isFav);

@@ -23,5 +23,7 @@ export const removeFromCart = (id) => {
 
   delete cart[id];
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  Object.keys(cart).length
+    ? localStorage.setItem("cart", JSON.stringify(cart))
+    : localStorage.removeItem("cart");
 };

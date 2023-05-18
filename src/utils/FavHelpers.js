@@ -12,5 +12,7 @@ export const toggleFav = (id) => {
     fav[id] = true;
   }
 
-  localStorage.setItem("fav", JSON.stringify(fav));
+  Object.keys(fav).length
+    ? localStorage.setItem("fav", JSON.stringify(fav))
+    : localStorage.removeItem("fav");
 };
