@@ -34,7 +34,8 @@ const GoodCard = ({ product }) => {
   const btnRemoveData = {
     text: "X",
     onClick: () => {
-      !removeFromCart(id) && setInCart(false);
+      removeFromCart(id);
+      setInCart(false);
     },
   };
 
