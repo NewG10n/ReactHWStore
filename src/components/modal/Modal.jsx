@@ -43,7 +43,10 @@ const Modal = ({ modal }) => {
 
   return (
     <>
-      <div className={styles.modal}>
+      <div
+        className={styles.modal}
+        onClick={(e) => e.target === e.currentTarget && setModal(!isModal)}
+      >
         <div className={styles.modalBody}>
           <h2 className="modal-title">{"title"}</h2>
           <Button btnData={confirmButtonData} />
