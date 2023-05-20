@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./components/header";
 import GoodsList from "./components/goodsList";
 import Modal from "./components/modal";
 import ModalContext from "./contexts/ModalContext";
@@ -12,6 +13,7 @@ function App() {
     <ModalContext.Provider
       value={{ isModal, setModal, modalContent, setModalContent }}
     >
+      <Header />
       <GoodsList />
       {isModal && <Modal />}
     </ModalContext.Provider>
