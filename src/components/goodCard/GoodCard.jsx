@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import ModalContext from "../../contexts/ModalContext";
 import Button from "../button";
 import { addToCart, removeFromCart, checkCart } from "../../utils/CartHelpers";
 import { checkFav, toggleFav } from "../../utils/FavHelpers";

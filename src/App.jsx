@@ -1,10 +1,9 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import GoodsList from "./components/goodsList";
 import Modal from "./components/modal";
-
+import ModalContext from "./contexts/ModalContext";
 import "./App.css";
 
-const ModalContext = createContext(null);
 function App() {
   const [isModal, setModal] = useState(false);
 

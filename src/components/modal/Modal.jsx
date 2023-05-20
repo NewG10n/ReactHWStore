@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../button";
+import ModalContext from "../../contexts/ModalContext";
 
 import { createUseStyles } from "react-jss";
 
@@ -31,7 +32,7 @@ const useStyles = createUseStyles({
 });
 
 const Modal = ({ modal }) => {
-  const { isModal, setModal } = modal;
+  const { isModal, setModal } = useContext(ModalContext);
 
   const styles = useStyles();
 
@@ -44,7 +45,7 @@ const Modal = ({ modal }) => {
     <>
       <div className={styles.modal}>
         <div className={styles.modalBody}>
-          <h1 className="modal-title">{"title"}</h1>
+          <h2 className="modal-title">{"title"}</h2>
           <Button btnData={confirmButtonData} />
         </div>
       </div>
