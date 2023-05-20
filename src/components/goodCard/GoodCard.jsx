@@ -27,7 +27,7 @@ const GoodCard = ({ product }) => {
   const [isInCart, setInCart] = useState(checkCart(id));
   const [isFav, setFav] = useState(checkFav(id));
 
-  const { isModal, setModal } = useContext(ModalContext);
+  const { isModal, setModal, setModalContent } = useContext(ModalContext);
 
   const styles = useStyles();
 
@@ -36,6 +36,8 @@ const GoodCard = ({ product }) => {
     onClick: () => {
       addToCart(id);
       setInCart(true);
+
+      setModalContent(product);
       setModal(!isModal);
     },
   };

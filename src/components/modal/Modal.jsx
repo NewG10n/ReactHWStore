@@ -29,10 +29,20 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     alignItems: "center",
   },
+
+  modalImage: {
+    maxWidth: "30%",
+  },
+
+  modalText: {
+    textAlign: "center",
+  },
 });
 
 const Modal = ({ modal }) => {
-  const { isModal, setModal } = useContext(ModalContext);
+  const { isModal, setModal, modalContent } = useContext(ModalContext);
+
+  const { title, image } = modalContent;
 
   const styles = useStyles();
 
@@ -48,7 +58,15 @@ const Modal = ({ modal }) => {
         onClick={(e) => e.target === e.currentTarget && setModal(!isModal)}
       >
         <div className={styles.modalBody}>
-          <h2 className="modal-title">{"title"}</h2>
+          <h3>Great choice!</h3>
+          <img
+            src={image}
+            className={styles.modalImage}
+            alt={"product image"}
+          />
+          <p className={styles.modalText}>
+            <strong>{title}</strong> was successfully added to the Cart
+          </p>
           <Button btnData={confirmButtonData} />
         </div>
       </div>

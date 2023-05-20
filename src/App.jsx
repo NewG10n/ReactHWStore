@@ -6,9 +6,12 @@ import "./App.css";
 
 function App() {
   const [isModal, setModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
   return (
-    <ModalContext.Provider value={{ isModal, setModal }}>
+    <ModalContext.Provider
+      value={{ isModal, setModal, modalContent, setModalContent }}
+    >
       <GoodsList />
       {isModal && <Modal />}
     </ModalContext.Provider>
