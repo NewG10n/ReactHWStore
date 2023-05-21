@@ -59,11 +59,7 @@ const Modal = ({ modal }) => {
       >
         <div className={styles.modalBody}>
           <h3>Great choice!</h3>
-          <img
-            src={image}
-            className={styles.modalImage}
-            alt={"product image"}
-          />
+          <img src={image} className={styles.modalImage} alt={"product"} />
           <p className={styles.modalText}>
             <strong>{title}</strong> was successfully added to the Cart
           </p>

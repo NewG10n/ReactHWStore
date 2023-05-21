@@ -1,8 +1,14 @@
 import React, { useState, useContext } from "react";
 import ModalContext from "../../contexts/ModalContext";
 import Button from "../button";
-import { addToCart, removeFromCart, checkCart } from "../../utils/CartHelpers";
-import { checkFav, toggleFav } from "../../utils/FavHelpers";
+import {
+  getCartQty,
+  addToCart,
+  removeFromCart,
+  checkCart,
+} from "../../utils/CartHelpers";
+import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
+import CartFavContext from "../../contexts/CartFavContext";
 
 import { createUseStyles } from "react-jss";
 
@@ -28,6 +34,7 @@ const GoodCard = ({ product }) => {
   const [isFav, setFav] = useState(checkFav(id));
 
   const { isModal, setModal, setModalContent } = useContext(ModalContext);
+  const { setCartQty, setFavQty } = useContext(CartFavContext);
 
   const styles = useStyles();
 
@@ -36,7 +43,7 @@ const GoodCard = ({ product }) => {
     onClick: () => {
       addToCart(id);
       setInCart(true);
-
+      setCartQty(getCartQty());
       setModalContent(product);
       setModal(!isModal);
     },
@@ -46,6 +53,7 @@ const GoodCard = ({ product }) => {
     text: "Remove from Cart",
     onClick: () => {
       removeFromCart(id);
+      setCartQty(getCartQty());
       setInCart(false);
     },
   };
@@ -54,6 +62,7 @@ const GoodCard = ({ product }) => {
     text: isFav ? "Remove from Favorites" : "Add to Favorites",
     onClick: () => {
       toggleFav(id);
+      setFavQty(getFavQty());
       setFav(!isFav);
     },
   };

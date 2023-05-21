@@ -1,3 +1,11 @@
+export const getCartQty = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+
+  return cart
+    ? Object.keys(cart).reduce((qty, id) => qty + cart[id].qty, 0)
+    : null;
+};
+
 export const checkCart = (id) =>
   !!JSON.parse(localStorage.getItem("cart"))?.[id];
 

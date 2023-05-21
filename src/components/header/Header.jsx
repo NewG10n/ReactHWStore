@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
+import Button from "../button";
+import CartFavContext from "../../contexts/CartFavContext";
 
 const useStyles = createUseStyles({
   header: {
@@ -31,30 +33,35 @@ const useStyles = createUseStyles({
     fontSize: "40px",
     cursor: "pointer",
   },
-
-  headerBtn: {
-    position: "relative",
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "200px",
-      height: "200px",
-      background: "red",
-      zIndex: "1",
-    },
-  },
 });
 
 const Header = () => {
   const styles = useStyles();
 
+  const { cartQty, favQty } = useContext(CartFavContext);
+
+  const favBtnData = {
+    text: <FaHeart className={styles.favIcon} />,
+    counter: favQty,
+    onClick: () => {
+      console.log("going to the favs");
+    },
+  };
+
+  const cartBtnData = {
+    text: <FaShoppingCart className={styles.cartIcon} />,
+    counter: cartQty,
+    onClick: () => {
+      console.log("going to the cart");
+    },
+  };
+
   return (
     <header className={styles.header}>
       <h1>Shop Anything</h1>
       <div className={styles.headerBtns}>
-        <FaHeart className={`${styles.favIcon} ${styles.headerBtn}`} />
-        <FaShoppingCart className={styles.cartIcon} />
+        <Button btnData={favBtnData} />
+        <Button btnData={cartBtnData} />
       </div>
     </header>
   );

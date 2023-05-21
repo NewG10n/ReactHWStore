@@ -1,3 +1,9 @@
+export const getFavQty = () => {
+  const fav = JSON.parse(localStorage.getItem("fav"));
+
+  return fav ? Object.keys(fav).length : null;
+};
+
 export const checkFav = (id) => !!JSON.parse(localStorage.getItem("fav"))?.[id];
 
 export const toggleFav = (id) => {
