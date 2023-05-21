@@ -3,7 +3,6 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   button: {
-    backgroundColor: "none",
     color: "#007780",
     border: "none",
     padding: "4px 12px",

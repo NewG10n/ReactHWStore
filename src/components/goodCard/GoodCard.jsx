@@ -32,12 +32,12 @@ const useStyles = createUseStyles({
     padding: "20px",
 
     borderRadius: "10px",
-    boxShadow: "0 0 10px #007780",
+    boxShadow: "0 0 4px #007780",
     margin: "8px",
   },
 
   productID: {
-    fontSize: "8px",
+    fontSize: "10px",
     color: "grey",
     margin: "0 auto 0 0",
   },
@@ -64,6 +64,7 @@ const useStyles = createUseStyles({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    fontSize: "32px",
     padding: "8px",
   },
 

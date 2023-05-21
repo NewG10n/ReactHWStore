@@ -17,3 +17,7 @@ code {
     monospace;
 }
 
+button {
+  font-size: inherit;
+  display: flex;
+}
