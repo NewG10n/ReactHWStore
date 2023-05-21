@@ -12,7 +12,7 @@ const useStyles = createUseStyles({
     alignItems: "center",
     height: "100px",
     padding: "10px",
-    borderBottom: "1px solid black",
+    borderBottom: "2px solid grey",
   },
 
   headerBtns: {
@@ -22,16 +22,8 @@ const useStyles = createUseStyles({
     gap: "20px",
   },
 
-  cartIcon: {
-    color: "#007780",
+  headerIcon: {
     fontSize: "40px",
-    cursor: "pointer",
-  },
-
-  favIcon: {
-    color: "#007780",
-    fontSize: "40px",
-    cursor: "pointer",
   },
 });
 
@@ -41,7 +33,7 @@ const Header = () => {
   const { cartQty, favQty } = useContext(CartFavContext);
 
   const favBtnData = {
-    text: <FaHeart className={styles.favIcon} />,
+    text: <FaHeart className={styles.headerIcon} />,
     counter: favQty,
     onClick: () => {
       console.log("going to the favs");
@@ -49,7 +41,7 @@ const Header = () => {
   };
 
   const cartBtnData = {
-    text: <FaShoppingCart className={styles.cartIcon} />,
+    text: <FaShoppingCart className={styles.headerIcon} />,
     counter: cartQty,
     onClick: () => {
       console.log("going to the cart");

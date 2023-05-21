@@ -26,6 +26,7 @@ const useStyles = createUseStyles({
     maxWidth: "600px",
     margin: "auto",
     display: "flex",
+    gap: "12px",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -39,7 +40,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const Modal = ({ modal }) => {
+const Modal = () => {
   const { isModal, setModal, modalContent } = useContext(ModalContext);
 
   const { title, image } = modalContent;
