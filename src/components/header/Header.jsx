@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 
+import CartFavContext from "../../contexts/CartFavContext";
+
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
 import Button from "../button";
-import CartFavContext from "../../contexts/CartFavContext";
 
 const useStyles = createUseStyles({
   header: {
@@ -33,16 +34,24 @@ const Header = () => {
   const { cartQty, favQty } = useContext(CartFavContext);
 
   const favBtnData = {
-    text: <FaHeart className={styles.headerIcon} />,
-    counter: favQty,
+    content: (
+      <>
+        <FaHeart className={styles.headerIcon} />
+        {favQty}
+      </>
+    ),
     onClick: () => {
       console.log("going to the favs");
     },
   };
 
   const cartBtnData = {
-    text: <FaShoppingCart className={styles.headerIcon} />,
-    counter: cartQty,
+    content: (
+      <>
+        <FaShoppingCart className={styles.headerIcon} />
+        {cartQty}
+      </>
+    ),
     onClick: () => {
       console.log("going to the cart");
     },

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+
+import ModalContext from "./contexts/ModalContext";
+
+import CartFavContext from "./contexts/CartFavContext";
+import { getCartQty } from "./utils/CartHelpers";
+import { getFavQty } from "./utils/FavHelpers";
+
 import Header from "./components/header";
 import GoodsList from "./components/goodsList";
 import Modal from "./components/modal";
-import ModalContext from "./contexts/ModalContext";
-import CartFavContext from "./contexts/CartFavContext";
+
 import "./App.css";
-import { getCartQty } from "./utils/CartHelpers";
-import { getFavQty } from "./utils/FavHelpers";
 
 function App() {
   const [isModal, setModal] = useState(false);

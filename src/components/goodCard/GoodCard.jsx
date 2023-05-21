@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
-import ModalContext from "../../contexts/ModalContext";
-import CartFavContext from "../../contexts/CartFavContext";
+import PropTypes from "prop-types";
 
-import Button from "../button";
+import ModalContext from "../../contexts/ModalContext";
+
+import CartFavContext from "../../contexts/CartFavContext";
 import {
   getCartQty,
   addToCart,
@@ -11,16 +12,16 @@ import {
 } from "../../utils/CartHelpers";
 import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
 
+import Button from "../button";
+
+import { createUseStyles } from "react-jss";
 import {
   FaShoppingCart,
   FaCartPlus,
   FaRegHeart,
   FaHeart,
 } from "react-icons/fa";
-
 import { IoRemoveCircleOutline } from "react-icons/io5";
-
-import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   card: {
@@ -89,7 +90,7 @@ const GoodCard = ({ product }) => {
   const styles = useStyles();
 
   const btnAddData = {
-    text: isInCart ? <FaCartPlus /> : <FaShoppingCart />,
+    content: isInCart ? <FaCartPlus /> : <FaShoppingCart />,
     onClick: () => {
       addToCart(id);
       setInCart(true);
@@ -100,7 +101,7 @@ const GoodCard = ({ product }) => {
   };
 
   const btnRemoveData = {
-    text: <IoRemoveCircleOutline />,
+    content: <IoRemoveCircleOutline />,
     onClick: () => {
       removeFromCart(id);
       setCartQty(getCartQty());
@@ -109,7 +110,7 @@ const GoodCard = ({ product }) => {
   };
 
   const btnFavData = {
-    text: isFav ? <FaHeart /> : <FaRegHeart />,
+    content: isFav ? <FaHeart /> : <FaRegHeart />,
     onClick: () => {
       toggleFav(id);
       setFavQty(getFavQty());
@@ -132,6 +133,15 @@ const GoodCard = ({ product }) => {
       </div>
     </li>
   );
+};
+
+GoodCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default GoodCard;

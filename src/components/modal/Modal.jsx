@@ -48,7 +48,7 @@ const Modal = () => {
   const styles = useStyles();
 
   const confirmButtonData = {
-    text: "Keep shopping",
+    content: <>Keep shopping</>,
     onClick: () => setModal(!isModal),
   };
 

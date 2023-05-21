@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import GoodCard from "../goodCard";
+
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({

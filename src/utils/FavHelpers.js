@@ -7,16 +7,9 @@ export const getFavQty = () => {
 export const checkFav = (id) => !!JSON.parse(localStorage.getItem("fav"))?.[id];
 
 export const toggleFav = (id) => {
-  let fav = {};
-  if (localStorage.getItem("fav")) {
-    fav = JSON.parse(localStorage.getItem("fav"));
-  }
+  const fav = JSON.parse(localStorage.getItem("fav")) || {};
 
-  if (id in fav) {
-    delete fav[id];
-  } else {
-    fav[id] = true;
-  }
+  fav[id] ? delete fav[id] : (fav[id] = true);
 
   Object.keys(fav).length
     ? localStorage.setItem("fav", JSON.stringify(fav))

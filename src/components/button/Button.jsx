@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -18,14 +20,20 @@ const useStyles = createUseStyles({
 const Button = ({ btnData }) => {
   const styles = useStyles();
 
-  const { text, counter = null, onClick } = btnData;
+  const { content, onClick } = btnData;
 
   return (
     <button className={styles.button} onClick={onClick}>
-      {text}
-      {counter}
+      {content}
     </button>
   );
+};
+
+Button.propTypes = {
+  btnData: PropTypes.shape({
+    content: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Button;
