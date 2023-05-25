@@ -5,7 +5,7 @@ const Welcome = () => {
   return (
     <>
       <h1>Welcome to Shop Anything</h1>
-      <Link to="goods">Go shopping</Link>
+      <Link to="goods">Go shopping -></Link>
     </>
   );
 };

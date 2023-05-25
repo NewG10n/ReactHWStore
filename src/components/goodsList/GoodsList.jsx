@@ -24,6 +24,8 @@ const GoodsList = () => {
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
         setGoodsData(response.data);
+        // temporarily saving goods data
+        localStorage.setItem("goods", JSON.stringify(response.data));
       } catch (error) {
         console.error(error);
       }
