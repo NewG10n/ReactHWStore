@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 import ModalContext from "./contexts/ModalContext";
 
@@ -7,7 +8,6 @@ import { getCartQty } from "./utils/CartHelpers";
 import { getFavQty } from "./utils/FavHelpers";
 
 import Header from "./components/header";
-import GoodsList from "./components/goodsList";
 import Modal from "./components/modal";
 
 import "./App.css";
@@ -32,7 +32,7 @@ function App() {
         }}
       >
         <Header />
-        <GoodsList />
+        <Outlet />
       </CartFavContext.Provider>
 
       {isModal && <Modal />}

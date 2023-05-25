@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import CartFavContext from "../../contexts/CartFavContext";
 
@@ -59,10 +60,17 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1>Shop Anything</h1>
+      <Link to={"/"}>
+        <h1>Shop Anything</h1>
+      </Link>
+
       <div className={styles.headerBtns}>
-        <Button btnData={favBtnData} />
-        <Button btnData={cartBtnData} />
+        <Link to={"fav"}>
+          <Button btnData={favBtnData} />
+        </Link>
+        <Link to={"cart"}>
+          <Button btnData={cartBtnData} />
+        </Link>
       </div>
     </header>
   );
