@@ -69,7 +69,7 @@ const Header = () => {
       </Link>
 
       <div className={styles.headerBtns}>
-        <Link to={"fav"}>
+        <Link to={"favorites"}>
           <Button btnData={favBtnData} />
         </Link>
         <Link to={"cart"}>

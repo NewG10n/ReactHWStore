@@ -9,7 +9,7 @@ import store from "./redux/store.js";
 import App from "./App";
 import Goods from "./screens/goods";
 import Cart from "./screens/cart";
-import Fav from "./screens/fav";
+import Favorites from "./screens/favorites";
 import Welcome from "./screens/welcome";
 
 import "./index.css";
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
         element: <Goods />,
       },
       {
-        path: "fav",
-        element: <Fav />,
+        path: "favorites",
+        element: <Favorites />,
       },
       {
         path: "cart",

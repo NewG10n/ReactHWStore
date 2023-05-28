@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import GoodsList from "../../components/goodsList";
 
-const Fav = () => {
+const Favorites = () => {
   const favoritesList = useSelector((state) => state.goods).filter(
     (item) => item.isFavorite
   );
@@ -16,4 +16,4 @@ const Fav = () => {
   );
 };
 
-export default Fav;
+export default Favorites;
