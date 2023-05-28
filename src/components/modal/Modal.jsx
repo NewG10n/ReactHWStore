@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../button";
 
 import { useDispatch, useSelector } from "react-redux";
-import { toggleModal } from "../../app/modalSlice";
+import { toggleModal } from "../../redux/modalSlice";
 
 import { createUseStyles } from "react-jss";
 

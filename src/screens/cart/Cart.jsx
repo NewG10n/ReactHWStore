@@ -1,36 +1,18 @@
-import React, { useEffect, useState } from "react";
-import GoodCard from "../../components/goodCard";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { createUseStyles } from "react-jss";
+import GoodsList from "../../components/goodsList";
 
-const useStyles = createUseStyles({
-  cards_container: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-  },
-});
+const Goods = () => {
+  const cartList = useSelector((state) => state.goods).filter(
+    (item) => item.cartQty
+  );
 
-const Cart = () => {
-  const [goodsData, setGoodsData] = useState([]);
-  const styles = useStyles();
-
-  useEffect(() => {
-    const getGoods = () => {
-      setGoodsData(JSON.parse(localStorage.getItem("cart")));
-    };
-
-    getGoods();
-  }, []);
-
-  return (
-    <ul className={styles.cards_container}>
-      {goodsData.map((product) => (
-        <GoodCard key={product.id} product={product} />
-      ))}
-    </ul>
+  return cartList.length ? (
+    <GoodsList list={cartList} />
+  ) : (
+    <h3>Your Cart is empty</h3>
   );
 };
 
-export default Cart;
+export default Goods;

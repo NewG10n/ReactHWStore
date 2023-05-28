@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-import GoodsList from "../../components/goodsList";
-
 import { useDispatch, useSelector } from "react-redux";
-import { fetch } from "../../app/goodsSlice";
+import { fetch } from "../../redux/goodsSlice";
+
+import GoodsList from "../../components/goodsList";
 
 const Goods = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Goods = () => {
     };
 
     getGoods();
-  }, []);
+  }, [dispatch]);
 
   const goodsList = useSelector((state) => state.goods);
 

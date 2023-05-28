@@ -7,9 +7,9 @@ import {
   addToCart,
   removeFromCart,
   toggleFavorite,
-} from "../../app/goodsSlice";
+} from "../../redux/goodsSlice";
 
-import { toggleModal, setModalContent } from "../../app/modalSlice";
+import { toggleModal, setModalContent } from "../../redux/modalSlice";
 
 import Button from "../button";
 
