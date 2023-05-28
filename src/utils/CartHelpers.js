@@ -8,20 +8,23 @@ export const checkCart = (id) => {
   return !!cart && !!cart.find((item) => item.id === id);
 };
 
-export const addToCart = (product) => {
-  const { id } = product;
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const itemIndex = cart.findIndex((item) => item.id === id);
-
-  cart[itemIndex]
-    ? (cart[itemIndex] = {
-        ...cart[itemIndex],
-        qty: cart[itemIndex].qty + 1,
-      })
-    : cart.push({ ...product, qty: 1 });
-
-  localStorage.setItem("cart", JSON.stringify(cart));
+// export const addToCart = (product) => {
+//   const { id } = product;
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//
+//   const itemIndex = cart.findIndex((item) => item.id === id);
+//
+//   cart[itemIndex]
+//     ? (cart[itemIndex] = {
+//         ...cart[itemIndex],
+//         qty: cart[itemIndex].qty + 1,
+//       })
+//     : cart.push({ ...product, qty: 1 });
+//
+//   localStorage.setItem("cart", JSON.stringify(cart));
+// };
+export const addCartQty = (state, id) => {
+  return state.map((item) => (item.id === id ? { ...item, cartQty: 1 } : item));
 };
 
 export const removeFromCart = (id) => {

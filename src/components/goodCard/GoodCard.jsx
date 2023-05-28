@@ -4,12 +4,11 @@ import PropTypes from "prop-types";
 import ModalContext from "../../contexts/ModalContext";
 
 import CartFavContext from "../../contexts/CartFavContext";
-import {
-  getCartQty,
-  addToCart,
-  removeFromCart,
-  checkCart,
-} from "../../utils/CartHelpers";
+import { getCartQty, removeFromCart, checkCart } from "../../utils/CartHelpers";
+
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../app/goodsSlice";
+
 import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
 
 import Button from "../button";
@@ -79,6 +78,7 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
+  const dispatch = useDispatch();
   const { title, image, price, id, qty = null } = product;
 
   const [isInCart, setInCart] = useState(checkCart(id));
@@ -99,7 +99,7 @@ const GoodCard = ({ product }) => {
       <FaShoppingCart />
     ),
     onClick: () => {
-      addToCart(product);
+      dispatch(addToCart(product));
       setInCart(true);
       setCartQty(getCartQty());
       setModalContent(product);

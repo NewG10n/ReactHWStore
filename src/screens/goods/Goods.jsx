@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
 import GoodCard from "../../components/goodCard";
 
 import { useDispatch, useSelector } from "react-redux";
-import { update } from "../../app/goodsSlice";
+import { fetch } from "../../app/goodsSlice";
 
 import { createUseStyles } from "react-jss";
 
@@ -21,27 +21,20 @@ const Goods = () => {
   const goodsList = useSelector((state) => state.goods);
   const dispatch = useDispatch();
 
-  const [goodsData, setGoodsData] = useState([]);
-
   const styles = useStyles();
 
   useEffect(() => {
     const getGoods = async () => {
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
-
-        // temporarily saving goods data
-        localStorage.setItem("goods", JSON.stringify(response.data));
-
-        //   redux
-        dispatch(update(response.data));
+        dispatch(fetch(response.data));
       } catch (error) {
         console.error(error);
       }
     };
 
     getGoods();
-  }, []);
+  }, [dispatch]);
 
   return (
     <ul className={styles.cards_container}>
