@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import ModalContext from "../../contexts/ModalContext";
-
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   addToCart,
   removeFromCart,
   toggleFavorite,
 } from "../../app/goodsSlice";
-import { toggleModal } from "../../app/modalSlice";
+
+import { toggleModal, setModalContent } from "../../app/modalSlice";
 
 import Button from "../button";
 
@@ -86,10 +86,7 @@ const GoodCard = ({ product }) => {
   const isFavorite = useSelector(
     (state) => !!state.goods.find((item) => item.id === id).isFavorite
   );
-
   const dispatch = useDispatch();
-
-  const { setModalContent } = useContext(ModalContext);
 
   const styles = useStyles();
 
@@ -104,7 +101,7 @@ const GoodCard = ({ product }) => {
     ),
     onClick: () => {
       dispatch(addToCart(product));
-      setModalContent(product);
+      dispatch(setModalContent(product));
       dispatch(toggleModal());
     },
   };
@@ -112,7 +109,13 @@ const GoodCard = ({ product }) => {
   const btnRemoveData = {
     content: <IoRemoveCircleOutline />,
     onClick: () => {
-      dispatch(removeFromCart(product));
+      dispatch(
+        setModalContent({
+          ...product,
+          actions: () => dispatch(removeFromCart(product)),
+        })
+      );
+      dispatch(toggleModal());
     },
   };
 

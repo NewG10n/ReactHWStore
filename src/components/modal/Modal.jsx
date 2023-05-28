@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from "../button";
-import ModalContext from "../../contexts/ModalContext";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal } from "../../app/modalSlice";
@@ -45,17 +44,45 @@ const useStyles = createUseStyles({
 
 const Modal = () => {
   const dispatch = useDispatch();
-
-  const { modalContent } = useContext(ModalContext);
-
-  const { title, image } = modalContent;
+  const modalContent = useSelector((state) => state.modal.modalContent);
+  const { title, image, actions } = modalContent;
 
   const styles = useStyles();
 
-  const confirmButtonData = {
-    content: <>Keep shopping</>,
+  const btnContinueData = {
+    content: <>Continue</>,
     onClick: () => dispatch(toggleModal()),
   };
+
+  const btnConfirmData = {
+    content: <>Yes, confirm</>,
+    onClick: () => {
+      actions();
+      dispatch(toggleModal());
+    },
+  };
+
+  const addedToCart = (
+    <>
+      <h3>Great choice!</h3>
+      <img src={image} className={styles.modalImage} alt={"product"} />
+      <p className={styles.modalText}>
+        <strong>{title}</strong> was successfully added to the Cart
+      </p>
+      <Button btnData={btnContinueData} />
+    </>
+  );
+
+  const confirmRemoveFromCart = (
+    <>
+      <h3>Are you sure?</h3>
+      <img src={image} className={styles.modalImage} alt={"product"} />
+      <p className={styles.modalText}>
+        Are you sure you want to delete <strong>{title}</strong> from your Cart?
+      </p>
+      <Button btnData={btnConfirmData} />
+    </>
+  );
 
   return (
     <>
@@ -64,12 +91,7 @@ const Modal = () => {
         onClick={(e) => e.target === e.currentTarget && dispatch(toggleModal())}
       >
         <div className={styles.modalBody}>
-          <h3>Great choice!</h3>
-          <img src={image} className={styles.modalImage} alt={"product"} />
-          <p className={styles.modalText}>
-            <strong>{title}</strong> was successfully added to the Cart
-          </p>
-          <Button btnData={confirmButtonData} />
+          {actions ? confirmRemoveFromCart : addedToCart}
         </div>
       </div>
     </>
