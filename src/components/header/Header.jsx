@@ -34,12 +34,9 @@ const useStyles = createUseStyles({
 const Header = () => {
   const styles = useStyles();
 
-  const favoriteQty = useSelector((state) => state.goods).reduce(
-    (acc, item) => (item.isFavorite ? (acc += 1) : acc),
-    null
-  );
-
-  const cartQty = useSelector((state) => state.goods).reduce(
+  const goods = useSelector((state) => state.goods);
+  const favoriteQty = goods.filter((item) => item.isFavorite).length;
+  const cartQty = goods.reduce(
     (acc, item) => (item.cartQty ? (acc += item.cartQty) : acc),
     null
   );
@@ -48,7 +45,7 @@ const Header = () => {
     content: (
       <>
         <FaHeart className={styles.headerIcon} />
-        {favoriteQty}
+        {favoriteQty || null}
       </>
     ),
   };

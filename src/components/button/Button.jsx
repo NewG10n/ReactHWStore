@@ -31,8 +31,7 @@ const Button = ({ btnData }) => {
 
 Button.propTypes = {
   btnData: PropTypes.shape({
-    content: PropTypes.object.isRequired,
-    onClick: PropTypes.func,
+    content: PropTypes.element.isRequired,
   }).isRequired,
 };
 
