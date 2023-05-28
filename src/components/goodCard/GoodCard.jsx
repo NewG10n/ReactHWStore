@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import ModalContext from "../../contexts/ModalContext";
 
 import CartFavContext from "../../contexts/CartFavContext";
-import { getCartQty, removeFromCart, checkCart } from "../../utils/CartHelpers";
+import { getCartQty, checkCart } from "../../utils/CartHelpers";
 
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../app/goodsSlice";
+import { addToCart, removeFromCart } from "../../app/goodsSlice";
 
 import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
 
@@ -110,7 +110,7 @@ const GoodCard = ({ product }) => {
   const btnRemoveData = {
     content: <IoRemoveCircleOutline />,
     onClick: () => {
-      removeFromCart(id);
+      dispatch(removeFromCart(product));
       setCartQty(getCartQty());
       setInCart(false);
     },
