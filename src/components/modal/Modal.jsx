@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import Button from "../button";
 import ModalContext from "../../contexts/ModalContext";
 
+import { useDispatch, useSelector } from "react-redux";
+import { toggleModal } from "../../app/modalSlice";
+
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -41,7 +44,9 @@ const useStyles = createUseStyles({
 });
 
 const Modal = () => {
-  const { isModal, setModal, modalContent } = useContext(ModalContext);
+  const dispatch = useDispatch();
+
+  const { modalContent } = useContext(ModalContext);
 
   const { title, image } = modalContent;
 
@@ -49,14 +54,14 @@ const Modal = () => {
 
   const confirmButtonData = {
     content: <>Keep shopping</>,
-    onClick: () => setModal(!isModal),
+    onClick: () => dispatch(toggleModal()),
   };
 
   return (
     <>
       <div
         className={styles.modal}
-        onClick={(e) => e.target === e.currentTarget && setModal(!isModal)}
+        onClick={(e) => e.target === e.currentTarget && dispatch(toggleModal())}
       >
         <div className={styles.modalBody}>
           <h3>Great choice!</h3>

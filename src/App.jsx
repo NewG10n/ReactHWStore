@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import ModalContext from "./contexts/ModalContext";
+import { useSelector } from "react-redux";
 
-import CartFavContext from "./contexts/CartFavContext";
-import { getCartQty } from "./utils/CartHelpers";
-import { getFavQty } from "./utils/FavHelpers";
+import ModalContext from "./contexts/ModalContext";
 
 import Header from "./components/header";
 import Modal from "./components/modal";
@@ -13,27 +11,14 @@ import Modal from "./components/modal";
 import "./App.css";
 
 function App() {
-  const [isModal, setModal] = useState(false);
+  const isModal = useSelector((state) => state.modal);
+
   const [modalContent, setModalContent] = useState(null);
 
-  const [cartQty, setCartQty] = useState(getCartQty);
-  const [favQty, setFavQty] = useState(getFavQty);
-
   return (
-    <ModalContext.Provider
-      value={{ isModal, setModal, modalContent, setModalContent }}
-    >
-      <CartFavContext.Provider
-        value={{
-          cartQty,
-          setCartQty,
-          favQty,
-          setFavQty,
-        }}
-      >
-        <Header />
-        <Outlet />
-      </CartFavContext.Provider>
+    <ModalContext.Provider value={{ modalContent, setModalContent }}>
+      <Header />
+      <Outlet />
 
       {isModal && <Modal />}
     </ModalContext.Provider>

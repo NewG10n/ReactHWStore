@@ -39,8 +39,6 @@ const Header = () => {
     null
   );
 
-  console.log(favoriteQty);
-
   const cartQty = useSelector((state) => state.goods).reduce(
     (acc, item) => (item.cartQty ? (acc += item.cartQty) : acc),
     null

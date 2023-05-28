@@ -3,17 +3,13 @@ import PropTypes from "prop-types";
 
 import ModalContext from "../../contexts/ModalContext";
 
-import CartFavContext from "../../contexts/CartFavContext";
-import { getCartQty } from "../../utils/CartHelpers";
-
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToCart,
   removeFromCart,
   toggleFavorite,
 } from "../../app/goodsSlice";
-
-import { getFavQty } from "../../utils/FavHelpers";
+import { toggleModal } from "../../app/modalSlice";
 
 import Button from "../button";
 
@@ -87,15 +83,13 @@ const GoodCard = ({ product }) => {
   const isInCart = useSelector(
     (state) => !!state.goods.find((item) => item.id === id).cartQty
   );
-
   const isFavorite = useSelector(
     (state) => !!state.goods.find((item) => item.id === id).isFavorite
   );
 
   const dispatch = useDispatch();
 
-  const { isModal, setModal, setModalContent } = useContext(ModalContext);
-  const { setCartQty, setFavQty } = useContext(CartFavContext);
+  const { setModalContent } = useContext(ModalContext);
 
   const styles = useStyles();
 
@@ -110,9 +104,8 @@ const GoodCard = ({ product }) => {
     ),
     onClick: () => {
       dispatch(addToCart(product));
-      setCartQty(getCartQty());
       setModalContent(product);
-      setModal(!isModal);
+      dispatch(toggleModal());
     },
   };
 
@@ -120,7 +113,6 @@ const GoodCard = ({ product }) => {
     content: <IoRemoveCircleOutline />,
     onClick: () => {
       dispatch(removeFromCart(product));
-      setCartQty(getCartQty());
     },
   };
 
@@ -128,7 +120,6 @@ const GoodCard = ({ product }) => {
     content: isFavorite ? <FaHeart /> : <FaRegHeart />,
     onClick: () => {
       dispatch(toggleFavorite(product));
-      setFavQty(getFavQty());
     },
   };
 
