@@ -79,7 +79,7 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
-  const { title, image, price, id } = product;
+  const { title, image, price, id, qty = null } = product;
 
   const [isInCart, setInCart] = useState(checkCart(id));
   const [isFav, setFav] = useState(checkFav(id));
@@ -90,9 +90,16 @@ const GoodCard = ({ product }) => {
   const styles = useStyles();
 
   const btnAddData = {
-    content: isInCart ? <FaCartPlus /> : <FaShoppingCart />,
+    content: isInCart ? (
+      <>
+        <FaCartPlus />
+        {qty}
+      </>
+    ) : (
+      <FaShoppingCart />
+    ),
     onClick: () => {
-      addToCart(id);
+      addToCart(product);
       setInCart(true);
       setCartQty(getCartQty());
       setModalContent(product);
