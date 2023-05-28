@@ -6,7 +6,7 @@ import ModalContext from "../../contexts/ModalContext";
 import CartFavContext from "../../contexts/CartFavContext";
 import { getCartQty, checkCart } from "../../utils/CartHelpers";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../app/goodsSlice";
 
 import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
@@ -78,10 +78,14 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
-  const dispatch = useDispatch();
   const { title, image, price, id, qty = null } = product;
 
-  const [isInCart, setInCart] = useState(checkCart(id));
+  const isInCart = useSelector(
+    (state) => !!state.goods.find((item) => item.id === id).cartQty
+  );
+
+  const dispatch = useDispatch();
+
   const [isFav, setFav] = useState(checkFav(id));
 
   const { isModal, setModal, setModalContent } = useContext(ModalContext);
@@ -100,7 +104,6 @@ const GoodCard = ({ product }) => {
     ),
     onClick: () => {
       dispatch(addToCart(product));
-      setInCart(true);
       setCartQty(getCartQty());
       setModalContent(product);
       setModal(!isModal);
@@ -112,7 +115,6 @@ const GoodCard = ({ product }) => {
     onClick: () => {
       dispatch(removeFromCart(product));
       setCartQty(getCartQty());
-      setInCart(false);
     },
   };
 
