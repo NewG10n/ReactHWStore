@@ -12,6 +12,8 @@ import Modal from "./components/modal";
 
 import "./App.css";
 
+import { useSelector, useDispatch } from "react-redux";
+
 function App() {
   const [isModal, setModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
