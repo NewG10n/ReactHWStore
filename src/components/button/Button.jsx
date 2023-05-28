@@ -5,13 +5,13 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   button: {
-    color: "#007780",
+    color: "#2596be",
     border: "none",
     padding: "4px 12px",
     borderRadius: "5px",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "#007780",
+      backgroundColor: "#2596be",
       color: "white",
     },
   },

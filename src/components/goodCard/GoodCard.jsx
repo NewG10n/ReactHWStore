@@ -33,7 +33,7 @@ const useStyles = createUseStyles({
     padding: "20px",
 
     borderRadius: "10px",
-    boxShadow: "0 0 4px #007780",
+    boxShadow: "0 0 4px #eeeee4",
     margin: "8px",
   },
 

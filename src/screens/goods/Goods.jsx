@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import GoodCard from "../goodCard";
+import GoodCard from "../../components/goodCard";
 
 import { createUseStyles } from "react-jss";
 
@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const GoodsList = () => {
+const Goods = () => {
   const [goodsData, setGoodsData] = useState([]);
 
   const styles = useStyles();
@@ -43,4 +43,4 @@ const GoodsList = () => {
   );
 };
 
-export default GoodsList;
+export default Goods;

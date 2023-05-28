@@ -9,12 +9,14 @@ import Button from "../button";
 
 const useStyles = createUseStyles({
   header: {
+    position: "sticky",
+    top: "0px",
+    height: "60px",
+    padding: "10px",
+    backgroundColor: "#e28743",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "100px",
-    padding: "10px",
-    borderBottom: "2px solid grey",
   },
 
   headerBtns: {
