@@ -20,7 +20,7 @@ const useStyles = createUseStyles({
 const Button = ({ btnData }) => {
   const styles = useStyles();
 
-  const { content, onClick } = btnData;
+  const { content, onClick = null } = btnData;
 
   return (
     <button className={styles.button} onClick={onClick}>
@@ -32,7 +32,7 @@ const Button = ({ btnData }) => {
 Button.propTypes = {
   btnData: PropTypes.shape({
     content: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
   }).isRequired,
 };
 

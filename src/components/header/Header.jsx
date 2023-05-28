@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import CartFavContext from "../../contexts/CartFavContext";
+import { useSelector } from "react-redux";
 
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
@@ -34,18 +34,25 @@ const useStyles = createUseStyles({
 const Header = () => {
   const styles = useStyles();
 
-  const { cartQty, favQty } = useContext(CartFavContext);
+  const favoriteQty = useSelector((state) => state.goods).reduce(
+    (acc, item) => (item.isFavorite ? (acc += 1) : acc),
+    null
+  );
+
+  console.log(favoriteQty);
+
+  const cartQty = useSelector((state) => state.goods).reduce(
+    (acc, item) => (item.cartQty ? (acc += item.cartQty) : acc),
+    null
+  );
 
   const favBtnData = {
     content: (
       <>
         <FaHeart className={styles.headerIcon} />
-        {favQty}
+        {favoriteQty}
       </>
     ),
-    onClick: () => {
-      console.log("going to the favs");
-    },
   };
 
   const cartBtnData = {
@@ -55,9 +62,6 @@ const Header = () => {
         {cartQty}
       </>
     ),
-    onClick: () => {
-      console.log("going to the cart");
-    },
   };
 
   return (

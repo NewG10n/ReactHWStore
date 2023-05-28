@@ -22,9 +22,17 @@ const goodsSlice = createSlice({
         }
         return item;
       }),
+
+    toggleFavorite: (state, action) =>
+      state.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, isFavorite: !item.isFavorite }
+          : item
+      ),
   },
 });
 
-export const { fetch, addToCart, removeFromCart } = goodsSlice.actions;
+export const { fetch, addToCart, removeFromCart, toggleFavorite } =
+  goodsSlice.actions;
 
 export default goodsSlice.reducer;

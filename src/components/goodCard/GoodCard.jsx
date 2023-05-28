@@ -1,15 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import ModalContext from "../../contexts/ModalContext";
 
 import CartFavContext from "../../contexts/CartFavContext";
-import { getCartQty, checkCart } from "../../utils/CartHelpers";
+import { getCartQty } from "../../utils/CartHelpers";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../app/goodsSlice";
+import {
+  addToCart,
+  removeFromCart,
+  toggleFavorite,
+} from "../../app/goodsSlice";
 
-import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
+import { getFavQty } from "../../utils/FavHelpers";
 
 import Button from "../button";
 
@@ -84,9 +88,11 @@ const GoodCard = ({ product }) => {
     (state) => !!state.goods.find((item) => item.id === id).cartQty
   );
 
-  const dispatch = useDispatch();
+  const isFavorite = useSelector(
+    (state) => !!state.goods.find((item) => item.id === id).isFavorite
+  );
 
-  const [isFav, setFav] = useState(checkFav(id));
+  const dispatch = useDispatch();
 
   const { isModal, setModal, setModalContent } = useContext(ModalContext);
   const { setCartQty, setFavQty } = useContext(CartFavContext);
@@ -119,11 +125,10 @@ const GoodCard = ({ product }) => {
   };
 
   const btnFavData = {
-    content: isFav ? <FaHeart /> : <FaRegHeart />,
+    content: isFavorite ? <FaHeart /> : <FaRegHeart />,
     onClick: () => {
-      toggleFav(id);
+      dispatch(toggleFavorite(product));
       setFavQty(getFavQty());
-      setFav(!isFav);
     },
   };
 
