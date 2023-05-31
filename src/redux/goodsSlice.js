@@ -33,4 +33,9 @@ const goodsSlice = createSlice({
 export const { fetch, addToCart, removeFromCart, toggleFavorite } =
   goodsSlice.actions;
 
+export const getAllGoods = (state) => state.goods;
+
+export const getGoodById = (state, itemId) =>
+  state.goods.find((item) => item.id === itemId);
+
 export default goodsSlice.reducer;

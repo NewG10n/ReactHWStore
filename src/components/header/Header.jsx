@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { getAllGoods } from "../../redux/goodsSlice";
 
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
@@ -34,7 +35,7 @@ const useStyles = createUseStyles({
 const Header = () => {
   const styles = useStyles();
 
-  const goods = useSelector((state) => state.goods);
+  const goods = useSelector(getAllGoods);
   const favoriteQty = goods.filter((item) => item.isFavorite).length;
   const cartQty = goods.reduce(
     (acc, item) => (item.cartQty ? (acc += item.cartQty) : acc),

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
   addToCart,
+  getGoodById,
   removeFromCart,
   toggleFavorite,
 } from "../../redux/goodsSlice";
@@ -80,11 +81,9 @@ const useStyles = createUseStyles({
 const GoodCard = ({ product }) => {
   const { title, image, price, id, qty = null } = product;
 
-  const isInCart = useSelector(
-    (state) => !!state.goods.find((item) => item.id === id).cartQty
-  );
+  const isInCart = useSelector((state) => !!getGoodById(state, id).cartQty);
   const isFavorite = useSelector(
-    (state) => !!state.goods.find((item) => item.id === id).isFavorite
+    (state) => !!getGoodById(state, id).isFavorite
   );
   const dispatch = useDispatch();
 

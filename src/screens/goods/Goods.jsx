@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetch } from "../../redux/goodsSlice";
+import { fetch, getAllGoods } from "../../redux/goodsSlice";
 
 import GoodsList from "../../components/goodsList";
 
@@ -22,7 +22,7 @@ const Goods = () => {
     getGoods();
   }, [dispatch]);
 
-  const goodsList = useSelector((state) => state.goods);
+  const goodsList = useSelector(getAllGoods);
 
   return <GoodsList list={goodsList} />;
 };

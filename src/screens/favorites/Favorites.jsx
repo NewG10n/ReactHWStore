@@ -3,9 +3,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import GoodsList from "../../components/goodsList";
+import { getAllGoods } from "../../redux/goodsSlice";
 
 const Favorites = () => {
-  const favoritesList = useSelector((state) => state.goods).filter(
+  const favoritesList = useSelector(getAllGoods).filter(
     (item) => item.isFavorite
   );
 

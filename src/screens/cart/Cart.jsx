@@ -2,11 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import GoodsList from "../../components/goodsList";
+import { getAllGoods } from "../../redux/goodsSlice";
 
 const Goods = () => {
-  const cartList = useSelector((state) => state.goods).filter(
-    (item) => item.cartQty
-  );
+  const cartList = useSelector(getAllGoods).filter((item) => item.cartQty);
 
   return cartList.length ? (
     <GoodsList list={cartList} />
