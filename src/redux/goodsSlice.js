@@ -7,28 +7,26 @@ const goodsSlice = createSlice({
   reducers: {
     fetch: (state, action) => selectUnique(state, action.payload),
 
-    addToCart: (state, action) =>
-      state.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, cartQty: (item.cartQty || 0) + 1 }
-          : item
-      ),
+    addToCart: (state, action) => {
+      const product = state.find((item) => item.id === action.payload.id);
+      if (product) {
+        product.cartQty = (product.cartQty || 0) + 1;
+      }
+    },
 
-    removeFromCart: (state, action) =>
-      state.map((item) => {
-        if (item.id === action.payload.id) {
-          const { cartQty, ...updatedItem } = item;
-          return updatedItem;
-        }
-        return item;
-      }),
+    removeFromCart: (state, action) => {
+      const product = state.find((item) => item.id === action.payload.id);
+      if (product) {
+        delete product.cartQty;
+      }
+    },
 
-    toggleFavorite: (state, action) =>
-      state.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, isFavorite: !item.isFavorite }
-          : item
-      ),
+    toggleFavorite: (state, action) => {
+      const product = state.find((item) => item.id === action.payload.id);
+      if (product) {
+        product.isFavorite = !product.isFavorite;
+      }
+    },
   },
 });
 
