@@ -1,26 +1,19 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetch, getAllGoods } from "../../redux/goodsSlice";
+import { fetchGoods, getAllGoods } from "../../redux/goodsSlice";
 
 import GoodsList from "../../components/goodsList";
 
 const Goods = () => {
   const dispatch = useDispatch();
+  const goodsStatus = useSelector((state) => state.goods.status);
 
   useEffect(() => {
-    const getGoods = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        dispatch(fetch(response.data));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getGoods();
-  }, [dispatch]);
+    if (goodsStatus === "idle") {
+      dispatch(fetchGoods());
+    }
+  }, [goodsStatus, dispatch]);
 
   const goodsList = useSelector(getAllGoods);
 

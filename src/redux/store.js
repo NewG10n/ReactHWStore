@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import logger from "redux-logger";
 
 import goodsReducer from "./goodsSlice";
@@ -9,5 +10,5 @@ export default configureStore({
     goods: goodsReducer,
     modal: modalReducer,
   }),
-  middleware: [logger],
+  middleware: [thunk, logger],
 });
