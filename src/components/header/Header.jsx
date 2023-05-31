@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import CartFavContext from "../../contexts/CartFavContext";
+import { useSelector } from "react-redux";
+import { getAllGoods } from "../../redux/goodsSlice";
 
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
@@ -8,12 +10,14 @@ import Button from "../button";
 
 const useStyles = createUseStyles({
   header: {
+    position: "sticky",
+    top: "0px",
+    height: "60px",
+    padding: "10px",
+    backgroundColor: "#e28743",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "100px",
-    padding: "10px",
-    borderBottom: "2px solid grey",
   },
 
   headerBtns: {
@@ -31,18 +35,20 @@ const useStyles = createUseStyles({
 const Header = () => {
   const styles = useStyles();
 
-  const { cartQty, favQty } = useContext(CartFavContext);
+  const goods = useSelector(getAllGoods);
+  const favoriteQty = goods.filter((item) => item.isFavorite).length;
+  const cartQty = goods.reduce(
+    (acc, item) => (item.cartQty ? (acc += item.cartQty) : acc),
+    null
+  );
 
   const favBtnData = {
     content: (
       <>
         <FaHeart className={styles.headerIcon} />
-        {favQty}
+        {favoriteQty || null}
       </>
     ),
-    onClick: () => {
-      console.log("going to the favs");
-    },
   };
 
   const cartBtnData = {
@@ -52,17 +58,21 @@ const Header = () => {
         {cartQty}
       </>
     ),
-    onClick: () => {
-      console.log("going to the cart");
-    },
   };
 
   return (
     <header className={styles.header}>
-      <h1>Shop Anything</h1>
+      <Link to={"/"}>
+        <h1>Shop Anything</h1>
+      </Link>
+
       <div className={styles.headerBtns}>
-        <Button btnData={favBtnData} />
-        <Button btnData={cartBtnData} />
+        <Link to={"favorites"}>
+          <Button btnData={favBtnData} />
+        </Link>
+        <Link to={"cart"}>
+          <Button btnData={cartBtnData} />
+        </Link>
       </div>
     </header>
   );

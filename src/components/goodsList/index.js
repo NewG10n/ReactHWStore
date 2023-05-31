@@ -1,3 +1,3 @@
-import GoodsList from './GoodsList'
+import GoodsList from "./GoodsList";
 
-export default GoodsList
+export default GoodsList;

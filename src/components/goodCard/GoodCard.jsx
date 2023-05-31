@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import ModalContext from "../../contexts/ModalContext";
+import { useSelector, useDispatch } from "react-redux";
 
-import CartFavContext from "../../contexts/CartFavContext";
 import {
-  getCartQty,
   addToCart,
+  getGoodById,
   removeFromCart,
-  checkCart,
-} from "../../utils/CartHelpers";
-import { getFavQty, checkFav, toggleFav } from "../../utils/FavHelpers";
+  toggleFavorite,
+} from "../../redux/goodsSlice";
+
+import { toggleModal, setModalContent } from "../../redux/modalSlice";
 
 import Button from "../button";
 
@@ -33,7 +33,7 @@ const useStyles = createUseStyles({
     padding: "20px",
 
     borderRadius: "10px",
-    boxShadow: "0 0 4px #007780",
+    boxShadow: "0 0 4px #eeeee4",
     margin: "8px",
   },
 
@@ -79,42 +79,49 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
-  const { title, image, price, id } = product;
+  const { title, image, price, id, qty = null } = product;
 
-  const [isInCart, setInCart] = useState(checkCart(id));
-  const [isFav, setFav] = useState(checkFav(id));
-
-  const { isModal, setModal, setModalContent } = useContext(ModalContext);
-  const { setCartQty, setFavQty } = useContext(CartFavContext);
+  const isInCart = useSelector((state) => !!getGoodById(state, id).cartQty);
+  const isFavorite = useSelector(
+    (state) => !!getGoodById(state, id).isFavorite
+  );
+  const dispatch = useDispatch();
 
   const styles = useStyles();
 
   const btnAddData = {
-    content: isInCart ? <FaCartPlus /> : <FaShoppingCart />,
+    content: isInCart ? (
+      <>
+        <FaCartPlus />
+        {qty}
+      </>
+    ) : (
+      <FaShoppingCart />
+    ),
     onClick: () => {
-      addToCart(id);
-      setInCart(true);
-      setCartQty(getCartQty());
-      setModalContent(product);
-      setModal(!isModal);
+      dispatch(addToCart(product));
+      dispatch(setModalContent(product));
+      dispatch(toggleModal());
     },
   };
 
   const btnRemoveData = {
     content: <IoRemoveCircleOutline />,
     onClick: () => {
-      removeFromCart(id);
-      setCartQty(getCartQty());
-      setInCart(false);
+      dispatch(
+        setModalContent({
+          ...product,
+          actions: () => dispatch(removeFromCart(product)),
+        })
+      );
+      dispatch(toggleModal());
     },
   };
 
   const btnFavData = {
-    content: isFav ? <FaHeart /> : <FaRegHeart />,
+    content: isFavorite ? <FaHeart /> : <FaRegHeart />,
     onClick: () => {
-      toggleFav(id);
-      setFavQty(getFavQty());
-      setFav(!isFav);
+      dispatch(toggleFavorite(product));
     },
   };
 
