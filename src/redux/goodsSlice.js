@@ -46,10 +46,6 @@ const goodsSlice = createSlice({
       .addCase(fetchGoods.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = selectUnique(state.data, action.payload);
-      })
-      .addCase(fetchGoods.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
       });
   },
 });

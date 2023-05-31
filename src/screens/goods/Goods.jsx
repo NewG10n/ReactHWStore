@@ -5,6 +5,8 @@ import { fetchGoods, getAllGoods } from "../../redux/goodsSlice";
 
 import GoodsList from "../../components/goodsList";
 
+import { GiSandsOfTime } from "react-icons/gi";
+
 const Goods = () => {
   const dispatch = useDispatch();
   const goodsStatus = useSelector((state) => state.goods.status);
@@ -17,7 +19,11 @@ const Goods = () => {
 
   const goodsList = useSelector(getAllGoods);
 
-  return <GoodsList list={goodsList} />;
+  return goodsStatus === "loading" ? (
+    <GiSandsOfTime />
+  ) : (
+    <GoodsList list={goodsList} />
+  );
 };
 
 export default Goods;
