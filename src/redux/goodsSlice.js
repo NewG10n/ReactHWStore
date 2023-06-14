@@ -57,4 +57,7 @@ export const getAllGoods = (state) => state.goods.data;
 export const getGoodById = (state, itemId) =>
   state.goods.data.find((item) => item.id === itemId);
 
+export const getOrderedGoods = (state) =>
+  state.goods.data.filter((item) => item.cartQty);
+
 export default goodsSlice.reducer;

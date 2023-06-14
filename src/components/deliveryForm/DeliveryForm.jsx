@@ -1,4 +1,8 @@
 import React from "react";
+
+import { useSelector } from "react-redux";
+import { getOrderedGoods } from "../../redux/goodsSlice";
+
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 
@@ -17,6 +21,17 @@ const TextInput = ({ label, ...props }) => {
 };
 
 const DeliveryForm = () => {
+  const orderedGoods = useSelector(getOrderedGoods);
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    setTimeout(() => {
+      console.log("ordered goods: ", orderedGoods);
+      console.log("delivery for: ", JSON.stringify(values, null, 2));
+
+      setSubmitting(false);
+    }, 400);
+  };
+
   return (
     <Formik
       initialValues={{
@@ -35,7 +50,8 @@ const DeliveryForm = () => {
           .required("Required"),
         age: Yup.number()
           .min(18, "You must be 18+")
-          .max(150, "Are you really so old?"),
+          .max(150, "Are you really so old?")
+          .required("Required"),
         address: Yup.string()
           .min(6, "Input valid address")
           .max(66, "Must be 66 characters or less")
@@ -44,12 +60,7 @@ const DeliveryForm = () => {
           .min(6, "Input valid telephone number")
           .required("Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
+      onSubmit={handleSubmit}
     >
       <Form>
         <TextInput
