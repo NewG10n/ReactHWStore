@@ -1,36 +1,45 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrderedGoods } from "../../redux/goodsSlice";
 
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
+import { createUseStyles } from "react-jss";
+import { logOrder } from "../../redux/orderSlice";
+
+const useStyles = createUseStyles({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    width: "20%",
+  },
+
+  error: { color: "red" },
+});
 
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
+
+  const styles = useStyles();
 
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
       <input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <div className={styles.error}>{meta.error}</div>
       ) : null}
     </>
   );
 };
 
 const DeliveryForm = () => {
+  const dispatch = useDispatch();
+
   const orderedGoods = useSelector(getOrderedGoods);
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log("ordered goods: ", orderedGoods);
-      console.log("delivery for: ", JSON.stringify(values, null, 2));
-
-      setSubmitting(false);
-    }, 400);
-  };
+  const styles = useStyles();
 
   return (
     <Formik
@@ -60,9 +69,13 @@ const DeliveryForm = () => {
           .min(6, "Input valid telephone number")
           .required("Required"),
       })}
-      onSubmit={handleSubmit}
+      onSubmit={(values) => {
+        dispatch(
+          logOrder({ customerData: values, orderedGoods: orderedGoods })
+        );
+      }}
     >
-      <Form>
+      <Form className={styles.form}>
         <TextInput
           label="First Name"
           name="firstName"

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import GoodsList from "../../components/goodsList";
-import { getAllGoods } from "../../redux/goodsSlice";
+import { getAllGoods, getOrderedGoods } from "../../redux/goodsSlice";
 
 import DeliveryForm from "../../components/deliveryForm";
 
@@ -16,7 +16,7 @@ const useStyles = createUseStyles({
 });
 
 const Goods = () => {
-  const cartList = useSelector(getAllGoods).filter((item) => item.cartQty);
+  const cartList = useSelector(getOrderedGoods);
 
   const styles = useStyles();
 
