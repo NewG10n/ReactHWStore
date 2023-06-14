@@ -5,6 +5,8 @@ import { getOrderedGoods } from "../../redux/goodsSlice";
 
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
+import { PatternFormat } from "react-number-format";
+
 import { createUseStyles } from "react-jss";
 import { logOrder } from "../../redux/orderSlice";
 
@@ -26,7 +28,29 @@ const TextInput = ({ label, ...props }) => {
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="text-input" {...field} {...props} />
+      <input {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div className={styles.error}>{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
+
+const TelInput = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+
+  const styles = useStyles();
+
+  return (
+    <>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <PatternFormat
+        {...field}
+        {...props}
+        format="(###) ###-##-##"
+        allowEmptyFormatting
+        mask="_"
+      />
       {meta.touched && meta.error ? (
         <div className={styles.error}>{meta.error}</div>
       ) : null}
@@ -65,8 +89,8 @@ const DeliveryForm = () => {
           .min(6, "Input valid address")
           .max(66, "Must be 66 characters or less")
           .required("Required"),
-        tel: Yup.number()
-          .min(6, "Input valid telephone number")
+        tel: Yup.string()
+          .min(10, "Input valid telephone number")
           .required("Required"),
       })}
       onSubmit={(values) => {
@@ -82,16 +106,13 @@ const DeliveryForm = () => {
           type="text"
           placeholder="First Name"
         />
-
         <TextInput
           label="Last Name"
           name="lastName"
           type="text"
           placeholder="Last Name"
         />
-
         <TextInput label="Age" name="age" type="number" placeholder="Age" />
-
         <TextInput
           label="Address"
           name="address"
@@ -99,12 +120,7 @@ const DeliveryForm = () => {
           placeholder="Address"
         />
 
-        <TextInput
-          label="Telephone number"
-          name="tel"
-          type="number"
-          placeholder="Telephone"
-        />
+        <TelInput label="Telephone number" name="tel" />
 
         <button type="submit">Checkout</button>
       </Form>
