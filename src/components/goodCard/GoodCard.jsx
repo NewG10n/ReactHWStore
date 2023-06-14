@@ -79,7 +79,7 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
-  const { title, image, price, id, qty = null } = product;
+  const { title, image, price, id, cartQty = null } = product;
 
   const isInCart = useSelector((state) => !!getGoodById(state, id).cartQty);
   const isFavorite = useSelector(
@@ -93,7 +93,7 @@ const GoodCard = ({ product }) => {
     content: isInCart ? (
       <>
         <FaCartPlus />
-        {qty}
+        {cartQty}
       </>
     ) : (
       <FaShoppingCart />
