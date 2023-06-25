@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GoodCard from "../goodCard";
 
 import { createUseStyles } from "react-jss";
-import { ViewContext } from "../../screens/goods/Goods";
+import { ViewContext } from "../../App";
 
 const useStyles = createUseStyles({
   cards_container: {
@@ -17,7 +17,7 @@ const useStyles = createUseStyles({
   },
 });
 const GoodsList = ({ list }) => {
-  const view = useContext(ViewContext);
+  const { view } = useContext(ViewContext);
 
   const styles = useStyles();
 

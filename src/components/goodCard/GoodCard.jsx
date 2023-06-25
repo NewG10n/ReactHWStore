@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { ViewContext } from "../../screens/goods/Goods";
+import { ViewContext } from "../../App";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -86,7 +86,7 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
-  const view = useContext(ViewContext);
+  const { view } = useContext(ViewContext);
 
   const { title, image, price, id, cartQty = null } = product;
 
