@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { ViewContext } from "../../screens/goods/Goods";
 
 import { useSelector, useDispatch } from "react-redux";
-
 import {
   addToCart,
   getGoodById,
   removeFromCart,
   toggleFavorite,
 } from "../../redux/goodsSlice";
-
 import { toggleModal, setModalContent } from "../../redux/modalSlice";
 
 import Button from "../button";
@@ -79,6 +78,10 @@ const useStyles = createUseStyles({
 });
 
 const GoodCard = ({ product }) => {
+  const view = useContext(ViewContext);
+
+  console.log(view);
+
   const { title, image, price, id, cartQty = null } = product;
 
   const isInCart = useSelector((state) => !!getGoodById(state, id).cartQty);
