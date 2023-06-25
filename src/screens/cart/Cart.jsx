@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import GoodsList from "../../components/goodsList";
-import { getAllGoods, getOrderedGoods } from "../../redux/goodsSlice";
+import { getOrderedGoods } from "../../redux/goodsSlice";
 
 import DeliveryForm from "../../components/deliveryForm";
 
