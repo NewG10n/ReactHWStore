@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome component renders correctly 1`] = `
+<div>
+  <h1>
+    Welcome to Shop Anything
+  </h1>
+  <a
+    href="/goods"
+  >
+    Go shopping -&gt;
+  </a>
+</div>
+`;
