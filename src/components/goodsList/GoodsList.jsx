@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import GoodCard from "../goodCard";
 
 import { createUseStyles } from "react-jss";
+import { ViewContext } from "../../screens/goods/Goods";
 
 const useStyles = createUseStyles({
   cards_container: {
@@ -10,12 +11,22 @@ const useStyles = createUseStyles({
     justifyContent: "space-around",
     overflow: "hidden",
   },
+
+  list_view: {
+    flexDirection: "column",
+  },
 });
 const GoodsList = ({ list }) => {
+  const view = useContext(ViewContext);
+
   const styles = useStyles();
 
   return (
-    <ul className={styles.cards_container}>
+    <ul
+      className={`${styles.cards_container} ${
+        view === "list" ? styles.list_view : ""
+      }`}
+    >
       {list.map((product) => (
         <GoodCard key={product.id} product={product} />
       ))}

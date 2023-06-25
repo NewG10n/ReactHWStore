@@ -26,14 +26,18 @@ const useStyles = createUseStyles({
   card: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "space-between",
     alignItems: "center",
     width: "20%",
     padding: "20px",
-
     borderRadius: "10px",
     boxShadow: "0 0 4px #eeeee4",
     margin: "8px",
+  },
+
+  list_view: {
+    flexDirection: "row",
+    gap: "20px",
+    width: "auto",
   },
 
   productID: {
@@ -55,7 +59,7 @@ const useStyles = createUseStyles({
 
   product__price: {
     fontWeight: "700",
-    margin: "auto 0 0 auto ",
+    margin: "auto 0 0 auto",
     color: "darkred",
   },
 
@@ -66,6 +70,10 @@ const useStyles = createUseStyles({
     width: "100%",
     fontSize: "32px",
     padding: "8px",
+  },
+
+  actions_list: {
+    width: "auto",
   },
 
   cartActions: {
@@ -79,8 +87,6 @@ const useStyles = createUseStyles({
 
 const GoodCard = ({ product }) => {
   const view = useContext(ViewContext);
-
-  console.log(view);
 
   const { title, image, price, id, cartQty = null } = product;
 
@@ -129,12 +135,18 @@ const GoodCard = ({ product }) => {
   };
 
   return (
-    <li className={styles.card}>
+    <li className={`${styles.card} ${view === "list" ? styles.list_view : ""}`}>
       <p className={styles.productID}>Product ID: {id}</p>
-      <img className={styles.card__img} src={image} alt={title} />
+      {view === "tiles" && (
+        <img className={styles.card__img} src={image} alt={title} />
+      )}
       <h4 className={styles.product__title}>{title}</h4>
       <p className={styles.product__price}>${price}</p>
-      <div className={styles.actions}>
+      <div
+        className={`${styles.actions} ${
+          view === "list" ? styles.actions_list : ""
+        }`}
+      >
         <Button btnData={btnFavData} />
         <div className={styles.cartActions}>
           {isInCart && <Button btnData={btnRemoveData} />}
