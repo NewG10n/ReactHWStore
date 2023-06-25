@@ -9,7 +9,7 @@ export const ViewToggle = () => {
     <>
       <input
         type="checkbox"
-        checked={view === "tiles" ? false : true}
+        checked={view === "list"}
         onChange={handleChange}
         id="switch"
       />
